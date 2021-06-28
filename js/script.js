@@ -1,52 +1,39 @@
 "use strict"
 
-if(4==9){
-    console.log('Ok!');
-}else{
-    console.log('Fuck!');
-}
+const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?','');
 
-let num = 50;
+const personalMovieBD = {
+    count: numberOfFilms,
+    movies:{},
+    actors:{},
+    genres:{},
+    privat:false
+};
 
-// if(num<49){
-//     console.log('Error!');
-// }else if (num>50){
-//     console.log('error!');
-// }else {
-//     console.log("Ok!")
-// }
-//
-// (num === 50) ? console.log('Ok!') : console.log('Error!');
+// const a = prompt("Один из последних просмотренных фильмов",''),
+//     b = prompt('оцените его',''),
+//     c = prompt("Один из последних просмотренных фильмов",''),
+//     d = prompt('оцените его','');
 
-// switch (num){
-//     case 49:
-//         console.log('Error!');
-//         break;
-//     case 100:
-//         console.log('Error!');
-//         break;
-//     case 50:
-//         console.log('Ok!');
-//         break;
-//     default:
-//         console.log('Error!');
-//         break;
-// }
-
-while(num<55){
-    console.log(num);
-    num++;
-}
-
-do {
-    console.log(num);
-    num++;
-}
-while (num<55);
-
-for(let i = 1; i < 8; i++){
-    if (i===6){
-        break;
+for (let i = 0; i<2; i++){
+    const a = prompt("Один из последних просмотренных фильмов",''),
+        b = prompt('оцените его','');
+    if (a !=null && b!=null && a!='' && b !='' && a.length<50){
+        personalMovieBD.movies[a] = b;
+        console.log('done');
+    }else{
+        console.log('error');
+        i--;
     }
-    console.log(i);
 }
+if(personalMovieBD["count"]<10){
+    console.log("Просмотрено довольно мало фильмов");
+}else if (personalMovieBD["count"]<=30){
+    console.log("Вы классический зритель");
+}else {
+    console.log("Вы киноман");
+}
+
+
+
+console.log(personalMovieBD)
