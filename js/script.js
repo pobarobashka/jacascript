@@ -1,65 +1,40 @@
 "use strict"
 
-let numberOfFilms;
-
-function start(){
-    numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?','');
-    while (numberOfFilms=='' || numberOfFilms == null || isNaN(numberOfFilms)){
-        numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?','');
-    }
+/*
+function learnJS(lang, callback){
+    console.log(`Я учу: ${lang}`);
+    callback();
 }
-// start();
 
-const personalMovieBD = {
-    count: numberOfFilms,
-    movies:{},
-    actors:{},
-    genres:{},
-    privat:false
+function done(){
+    console.log('Я прошел урок!');
+}
+
+learnJS('JavaScript', done);*/
+
+const options = {
+    name:'test',
+    width: 1024,
+    height:1024,
+    color:{
+        border:"black",
+        bg: 'red'
+    }
 };
+const {border, bg } = options["color"];
 
+// delete  options.name;
+//
+// console.log(options);
 
-
-function rememberMyFilms(){
-    for (let i = 0; i<2; i++){
-        const a = prompt("Один из последних просмотренных фильмов",''),
-            b = prompt('оцените его','');
-        if (a !=null && b!=null && a!='' && b !='' && a.length<50){
-            personalMovieBD.movies[a] = b;
-            console.log('done');
+/*
+for (let key in options){
+    if (typeof(options[key]) ==='object'){
+        for (let i in options[key]){
+            console.log(`свойство ${i} имеет значение ${options[key][i]}`);
+        }
         }else{
-            console.log('error');
-            i--;
-        }}
-}
-// rememberMyFilms();
-
-
-function detectedPersonalLevel(){
-    if(personalMovieBD["count"]<10){
-        console.log("Просмотрено довольно мало фильмов");
-    }else if (personalMovieBD["count"]<=30){
-        console.log("Вы классический зритель");
-    }else {
-        console.log("Вы киноман");
+        console.log(`свойство ${key} имеет значение ${options[key]}`);
     }
-}
-
-// detectedPersonalLevel();
-
-function showMyDB(hidden){
-    if (!hidden){
-        console.log(personalMovieBD);
-    }else {
-        console.log('Нет доступа')
-    }
-}
-function writeYourGenres(a){
-    for (let i=1; i<=3; i++){
-        a[i-1]=prompt(`Ваш любимый жанр под номером ${i}`,'');
-    }
-}
-writeYourGenres(personalMovieBD.genres);
-showMyDB(personalMovieBD["privat"]);
-
-
+}*/
+console.log(Object.keys(options).length)
