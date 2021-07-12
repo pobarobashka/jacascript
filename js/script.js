@@ -62,6 +62,7 @@ const deleteAdv = (arr)=>{
     })
 };
 deleteAdv(b);
+console.log(a[20]);
 
 // document.querySelector('.promo__adv').remove();
     document.querySelector('.promo__genre').textContent = 'драма';
@@ -71,13 +72,15 @@ deleteAdv(b);
     }
    // function createMovieList2(){
    //    movieDB.forEach((item,i) =>{
-   //        if(!a[i]){
-   //            a.prepend(`<li class="promo__interactive-item">${i+1}) ${item}
-   //                          <div class="delete"></div>
-   //                      </li>`)
-   //        }
-   //    a[i].textContent =`${i+1}) ${item}` ;
-   //      });
+   //        if(a[i]!==undefined){
+   //            a[i].textContent =`${i+1}) ${item}` ;
+   //
+   //        }else{
+   //              a.prepend(`<li class="promo__interactive-item">${i+1}) ${item}
+   //              <div class="delete"></div>
+   //              </li>`)
+   //         }
+   //    })
    // };
     function createMovieList(films,parent){
         parent.innerHTML = '';
