@@ -33,3 +33,16 @@ document.addEventListener('DOMContentLoaded',()=>{
         }
     })
 })*/
+'use strict'
+
+const now = new Date();
+
+console.log(now);
+// console.log(now.setHours(12,40));
+let start = new Date();
+for (let i=0; i<1000000;i++){
+    let a=0;
+    a+=i**3;
+}
+let end = new Date();
+alert(`Цикл отработал за ${(end - start)/1000} секунд`);
