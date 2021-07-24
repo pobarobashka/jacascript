@@ -1,5 +1,24 @@
 'use strict'
 
+function showThis(a,b){
+    console.log(this);
+    function sum(){
+        console.log(this);
+        return a + b;
+    }
+    console.log(sum());
+}
+showThis(4,5);
+
+const obj = {
+    a: 4,
+    b: 5,
+    sum: function (){
+        console.log(this);
+    }
+}
+obj.sum();
+
 function User(name, id){
     this.name = name;
     this.id =id;
@@ -8,13 +27,29 @@ function User(name, id){
         console.log(`Hello ${this.name}`);
     }
 }
+const ivan = new User('Ivan', 28);
 
-User.prototype.exit = function (){
-    console.log(`Пользователь${this.name} вышел`);
+
+const user = {
+    name: 'John'
 }
 
-const ivan = new User('Ivan', 28);
-const alex = new User('Alex', 31);
+function sayName(surname){
+    console.log(this);
+    console.log(this.name +' ' + surname);
 
-ivan.hello();
-alex.exit ();
+}
+sayName.call(user, 'Smith');
+sayName.apply(user,['Smith']);
+
+function count(num){
+    return num*this;
+}
+
+const double = count.bind(2);
+console.log(double(13));
+
+const btn = document.querySelector('.button');
+btn.addEventListener('click',function (){
+    console.log(this);
+})
