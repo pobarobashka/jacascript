@@ -1,55 +1,30 @@
 'use strict'
 
-function showThis(a,b){
-    console.log(this);
-    function sum(){
-        console.log(this);
-        return a + b;
+class Rectangle{
+    constructor(height,width) {
+        this.height = height;
+        this.width = width;
     }
-    console.log(sum());
-}
-showThis(4,5);
-
-const obj = {
-    a: 4,
-    b: 5,
-    sum: function (){
-        console.log(this);
+    calcArea(){
+        return this.height*this.width;
     }
 }
-obj.sum();
 
-function User(name, id){
-    this.name = name;
-    this.id =id;
-    this.human = true;
-    this.hello = function (){
-        console.log(`Hello ${this.name}`);
+class ColoredRectangleText extends Rectangle{
+    constructor(height,width,text,color) {
+        super(height,width);
+        this.text = text;
+        this.bgcolor = color;
+    }
+    showMYpROPS(){
+        console.log(`Текст:${this.text}, цвет:${this.bgcolor}`);
     }
 }
-const ivan = new User('Ivan', 28);
 
-
-const user = {
-    name: 'John'
-}
-
-function sayName(surname){
-    console.log(this);
-    console.log(this.name +' ' + surname);
-
-}
-sayName.call(user, 'Smith');
-sayName.apply(user,['Smith']);
-
-function count(num){
-    return num*this;
-}
-
-const double = count.bind(2);
-console.log(double(13));
-
-const btn = document.querySelector('.button');
-btn.addEventListener('click',function (){
-    console.log(this);
-})
+const div = new ColoredRectangleText(25,10,"hello",'red');
+div.showMYpROPS();
+console.log(div.calcArea());
+// const square = new Rectangle(10,10);
+// const long = new Rectangle(20,100);
+// console.log(square.calcArea());
+// console.log(long.calcArea());
