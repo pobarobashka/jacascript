@@ -1,10 +1,13 @@
- const log = function (a,b,...rest){
-    console.log(a,b,rest);
- }
+'use strict'
 
-log('dasd','dsadad','dsadada','dsadasdasdc',4);
-
-function calcOrDouble(number,index=2){
-    console.log(number*index);
+const persone = {
+    name:'Alex',
+    tel:'+375292824301',
+    parents:{
+        mom:'Olga',
+        dad:'Mike'
+    }
 }
-calcOrDouble(3);
+const clone = JSON.parse(JSON.stringify(persone));
+clone.parents.mom = 'Ann';
+console.log(clone);
