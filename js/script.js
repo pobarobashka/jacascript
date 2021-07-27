@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         });
         tabs.forEach((item)=>{
             item.classList.remove('tabheader__item_active');
-        });
+        });``
     }
     function showTabsContent(i){
         tabsContent[i].classList.remove('hide');
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         const target = event.target;
         if (target && target.classList.contains('tabheader__item')){
             tabs.forEach((item,i)=>{
-                if (target==item){
+                if (target === item){
                     hideTabsContent();
                     showTabsContent(i);
                 }
@@ -57,9 +57,7 @@ modalTriger.forEach((item)=>{
 
 modal.addEventListener('click',(event)=>{
     const target = event.target;
-    if (target && target==modal){
-        closeModal();
-    }else if(target==modalClose){
+    if (target && target === modal || target.getAttribute('data-close') == ''){
         closeModal();
     }
 });
@@ -84,7 +82,7 @@ const now = new Date();
 
 const deadline = '2021-08-01';
 function getTimeRemaining(endTime){
-    const t = Date.parse(endTime) - Date.parse(new Date()),
+    const t = Date.parse(endTime) - Date.parse(now),
         days = Math.floor(t/(1000*60*60*24)),
         hours = Math.floor((t/(1000*60*60))%24),
         minutes = Math.floor((t/100/60)%60),
@@ -191,7 +189,7 @@ setClock('.timer',deadline);
     //forms
     const  forms = document.querySelectorAll('form'),
         message = {
-            loading: 'загрузка',
+            loading: 'icons/spinner.svg',
             success: 'С вами свяжутся',
             fail:'Паломалося'
         };
@@ -203,10 +201,13 @@ setClock('.timer',deadline);
         form.addEventListener('submit',function(event){
             event.preventDefault();
 
-            const statusMessage= document.createElement('div');
-            statusMessage.classList.add('status');
-            statusMessage.textContent = message.loading;
-            form.append(statusMessage);
+            const statusMessage= document.createElement('img');
+            statusMessage.src = message.loading
+            statusMessage.style.cssText = `
+            display:block;
+            margin:0 auto;
+            `
+            form.insertAdjacentElement('afterend',statusMessage);
 
             const request = new XMLHttpRequest();
             request.open('POST','server.php');
@@ -222,19 +223,41 @@ setClock('.timer',deadline);
 
             request.addEventListener('load',function (){
                 if (request.status === 200){
-                    statusMessage.textContent = message.success;
+                    showFinalModal(message.success);
                     form.reset();
-                    setTimeout(function (){
-                        statusMessage.remove();
-                    },2000);
+                    statusMessage.remove();
+
                 }else {
-                    statusMessage.textContent = message.fail;
-                    setTimeout(function (){
+                    showFinalModal(message.fail);
+
                         statusMessage.remove();
-                    },2000);
+
                 }
-            })
-        })
+            });
+        });
     }
 
+    // Спасибо за заказ!!!!
+
+    function showFinalModal(message){
+        const prevModalDialog = document.querySelector('.modal__dialog');
+        prevModalDialog.classList.add('hide');
+        openModal();
+        const thanksModal = document.createElement('div');
+        thanksModal.classList.add('modal__dialog');
+        thanksModal.innerHTML = `
+        <div class="modal__content">
+            <div data-close class="modal__close">&times;</div>
+            <div class="modal__title">${message}</div>
+                        
+        </div>
+        `;
+        document.querySelector('.modal').append(thanksModal);
+        setTimeout(function (){
+            thanksModal.remove();
+            prevModalDialog.classList.add('hide');
+            prevModalDialog.classList.remove('hide');
+            closeModal();
+            },4000)
+    }
 })
