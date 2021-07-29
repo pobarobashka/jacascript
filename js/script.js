@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded',()=> {
         ".menu__field .container"
     ).render();
 
-    //forms
+    //отправка формы
     const forms = document.querySelectorAll('form'),
         message = {
             loading: 'icons/spinner.svg',
