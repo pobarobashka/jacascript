@@ -184,6 +184,12 @@ document.addEventListener('DOMContentLoaded',()=> {
         })
     })
 
+    // axios.get('http://localhost:3000/menu'
+    // ).then(data=>{
+    //         data.data.forEach(obj =>{
+    //             new MenuCard(obj.img,obj.altimg,obj.title,obj.descr,obj.price,".menu__field .container").render();
+    //         });
+
 
     //отправка формы
     const forms = document.querySelectorAll('form'),
