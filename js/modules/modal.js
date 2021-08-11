@@ -1,71 +1,55 @@
+function closeModal(modalSelector) {
+    const m = document.querySelector(modalSelector)
+    m.classList.remove('show');
+    m.classList.add('hide');
+    document.body.style.overflow = '';
+}
+
+function openModal(modalSelector) {
+    const m = document.querySelector(modalSelector)
+    m.classList.remove('hide');
+    m.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    // clearInterval(modalTimerId);
+}
 //Модальные окна
 
-function modal(){
-    const modalTriger = document.querySelectorAll('[data-modal]'),
-        modal = document.querySelector('.modal'),
+function modal(triggerSelector,modalSelector){
+    const modalTriger = document.querySelectorAll(triggerSelector),
+        modal = document.querySelector(modalSelector),
         modalClose = document.querySelector('[data-close]');
 
-    function closeModal() {
-        modal.classList.remove('show');
-        modal.classList.add('hide');
-        document.body.style.overflow = '';
-    }
 
-    function openModal() {
-        modal.classList.remove('hide');
-        modal.classList.add('show');
-        document.body.style.overflow = 'hidden';
-        // clearInterval(modalTimerId);
-    }
 
     modalTriger.forEach((item) => {
         item.addEventListener('click', () => {
-            openModal();
+            openModal(modalSelector);
         });
     });
 
     modal.addEventListener('click', (event) => {
         const target = event.target;
         if (target && target === modal || target.getAttribute('data-close') === '') {
-            closeModal();
+            closeModal(modalSelector);
         }
     });
     document.addEventListener('keydown', (event) => {
         if (event.code === 'Escape' && modal.classList.contains('show')) {
-            closeModal();
+            closeModal(modalSelector);
 
         }
     });
 
     function showModalByScroll() {
         if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
-            openModal();
+            openModal(modalSelector);
             window.removeEventListener('scroll', showModalByScroll);
         }
     }
 
     window.addEventListener('scroll', showModalByScroll);
 
-    function showFinalModal(message) {
-        const prevModalDialog = document.querySelector('.modal__dialog');
-        prevModalDialog.classList.add('hide');
-        openModal();
-        const thanksModal = document.createElement('div');
-        thanksModal.classList.add('modal__dialog');
-        thanksModal.innerHTML = `
-        <div class="modal__content">
-            <div data-close class="modal__close">&times;</div>
-            <div class="modal__title">${message}</div>
-                        
-        </div>
-        `;
-        document.querySelector('.modal').append(thanksModal);
-        setTimeout(function () {
-            thanksModal.remove();
-            prevModalDialog.classList.add('show');
-            prevModalDialog.classList.remove('hide');
-            closeModal();
-        }, 4000);
-    }
 }
-module.exports = modal;
+export {openModal, closeModal};
+export default modal;
+
