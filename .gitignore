@@ -1,3 +1,6 @@
 /node_modules
 /package-lock.json
 /webpack.config.js
+/mini/jQuery/node_modules
+/mini/jQuery/package-lock.json
+
